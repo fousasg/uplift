@@ -22,7 +22,8 @@ qini.performance <- function(x, direction = 1, plotit = TRUE, ...) {
   if (direction == 1) {
   
     ### Model Incremental gains 
-    inc.gains <- cumsum(perf[, 4] - perf[, 5] * sum(perf[, 2]) / sum(perf[, 3])) / sum(perf[, 2])
+    ## previous inc.gains <- cumsum(perf[, 4] - perf[, 5] * sum(perf[, 2]) / sum(perf[, 3])) / sum(perf[, 2])
+    inc.gains <- (cumsum(perf[, 4]) - cumsum(perf[, 5]) * cumsum(perf[, 2]) / cumsum(perf[, 3])) / sum(perf[, 2])
   
     ### Overall incremental gains
     overall.inc.gains <- sum(perf[, 4]) / sum(perf[, 2]) - sum(perf[, 5]) / sum(perf[, 3])
@@ -31,7 +32,8 @@ qini.performance <- function(x, direction = 1, plotit = TRUE, ...) {
   } else {
     
     ### Model Incremental gains 
-    inc.gains <- cumsum(-1 * (perf[, 4] - perf[, 5] * sum(perf[, 2]) / sum(perf[, 3]))) / sum(perf[, 2])
+    ## previous inc.gains <- cumsum(-1 * (perf[, 4] - perf[, 5] * sum(perf[, 2]) / sum(perf[, 3]))) / sum(perf[, 2])
+    inc.gains <- (-1*cumsum(perf[, 4]) - cumsum(perf[, 5]) * cumsum(perf[, 2]) / cumsum(perf[, 3])) / sum(perf[, 2])
       
     ### Overall incremental gains
     overall.inc.gains <- sum(perf[, 5]) / sum(perf[, 3]) - sum(perf[, 4]) / sum(perf[, 2]) 
